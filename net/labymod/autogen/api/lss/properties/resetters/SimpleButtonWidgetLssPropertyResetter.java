@@ -1,0 +1,17 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package net.labymod.autogen.api.lss.properties.resetters;
+
+import net.labymod.api.client.gui.screen.widget.widgets.input.SimpleButtonWidget;
+import net.labymod.api.client.gui.screen.widget.Widget;
+
+public class SimpleButtonWidgetLssPropertyResetter extends DivWidgetLssPropertyResetter
+{
+    @Override
+    public void reset(final Widget widget) {
+        if (widget instanceof SimpleButtonWidget) {}
+        super.reset(widget);
+    }
+}

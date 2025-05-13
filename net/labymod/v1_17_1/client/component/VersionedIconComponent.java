@@ -1,0 +1,52 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package net.labymod.v1_17_1.client.component;
+
+import org.jetbrains.annotations.NotNull;
+import net.labymod.api.client.gui.icon.Icon;
+
+public class VersionedIconComponent extends pf
+{
+    private final Icon icon;
+    private int width;
+    private int height;
+    private String placeholder;
+    
+    public VersionedIconComponent(final Icon icon) {
+        super("");
+        this.icon = icon;
+    }
+    
+    @NotNull
+    public Icon icon() {
+        return this.icon;
+    }
+    
+    public int width() {
+        return this.width;
+    }
+    
+    public int height() {
+        return this.height;
+    }
+    
+    @NotNull
+    public String placeholder() {
+        return this.placeholder;
+    }
+    
+    public pf i() {
+        final VersionedIconComponent component = new VersionedIconComponent(this.icon);
+        component.width = this.width;
+        component.height = this.height;
+        component.placeholder = this.placeholder;
+        return component;
+    }
+    
+    @NotNull
+    public String toString() {
+        return "IconComponent{icon=" + String.valueOf(this.icon) + ", width=" + this.width + ", height=" + this.height + ", placeholder='" + this.placeholder + "', siblings=" + String.valueOf(this.a) + ", style=" + String.valueOf(this.c());
+    }
+}

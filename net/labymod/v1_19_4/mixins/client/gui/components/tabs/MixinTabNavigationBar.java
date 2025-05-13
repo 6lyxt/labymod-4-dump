@@ -1,0 +1,97 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package net.labymod.v1_19_4.mixins.client.gui.components.tabs;
+
+import net.labymod.api.client.gui.mouse.MutableMouse;
+import net.labymod.api.client.gui.screen.key.MouseButton;
+import net.labymod.api.client.gui.screen.widget.converter.AbstractWidgetConverter;
+import net.labymod.core.client.gui.screen.key.mapper.DefaultKeyMapper;
+import net.labymod.api.client.gui.screen.widget.attributes.bounds.BoundsType;
+import org.spongepowered.asm.mixin.injection.At;
+import net.labymod.api.volt.annotation.Insert;
+import net.labymod.api.client.render.matrix.VanillaStackAccessor;
+import net.labymod.api.Laby;
+import net.labymod.api.volt.callback.InsertInfo;
+import java.util.function.Function;
+import java.util.HashMap;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Shadow;
+import com.google.common.collect.ImmutableList;
+import java.util.Map;
+import net.labymod.api.client.gui.screen.widget.converter.WidgetWatcher;
+import org.spongepowered.asm.mixin.Mixin;
+import net.labymod.v1_19_4.client.gui.TabNavigationBarAccessor;
+import net.labymod.api.client.gui.screen.widget.converter.ConvertableMinecraftWidget;
+import net.labymod.api.client.gui.screen.widget.AbstractWidget;
+
+@Mixin({ ept.class })
+public abstract class MixinTabNavigationBar<T extends AbstractWidget<?>> extends epj implements ConvertableMinecraftWidget<T>, TabNavigationBarAccessor
+{
+    private final WidgetWatcher<T> watcher;
+    private final Map<epr, VersionedTab> versionedTabs;
+    @Shadow
+    @Final
+    private ImmutableList<epr> m;
+    @Shadow
+    @Final
+    private eps l;
+    private epr labyMod$currentTab;
+    
+    public MixinTabNavigationBar() {
+        this.watcher = new WidgetWatcher<T>();
+        this.versionedTabs = new HashMap<epr, VersionedTab>();
+    }
+    
+    public ImmutableList<epr> getTabs() {
+        return this.m;
+    }
+    
+    public eps getTabManager() {
+        return this.l;
+    }
+    
+    public WidgetWatcher<T> getWatcher() {
+        return this.watcher;
+    }
+    
+    public VersionedTab versionedTabOf(final epr tab) {
+        return this.versionedTabs.computeIfAbsent(tab, VersionedTab::new);
+    }
+    
+    @Insert(method = { "render(Lcom/mojang/blaze3d/vertex/PoseStack;IIF)V" }, at = @At("HEAD"), cancellable = true)
+    public void render(final ehe stack, final int mouseX, final int mouseY, final float partialTicks, final InsertInfo ci) {
+        final epr tab = this.l.a();
+        if (this.labyMod$currentTab != tab) {
+            final int previousIndex = this.m.indexOf((Object)this.labyMod$currentTab);
+            final int newIndex = this.m.indexOf((Object)tab);
+            final boolean transitionToRight = newIndex > previousIndex;
+            this.versionedTabOf(this.labyMod$currentTab).setTransitionToRight(transitionToRight);
+            this.versionedTabOf(tab).setTransitionToRight(transitionToRight);
+        }
+        this.labyMod$currentTab = tab;
+        this.watcher.update(this, tab);
+        Laby.labyAPI().minecraft().updateMouse(mouseX, mouseY, mouse -> {
+            final boolean rendered = this.watcher.render(((VanillaStackAccessor)stack).stack(), mouse, partialTicks);
+            if (rendered) {
+                ci.cancel();
+            }
+        });
+    }
+    
+    public boolean a(final double mouseX, final double mouseY, final int button) {
+        final AbstractWidget<?> widget = this.watcher.getWidget();
+        if (widget == null || !widget.bounds().isInRectangle(BoundsType.BORDER, (float)mouseX, (float)mouseY)) {
+            return super.a(mouseX, mouseY, button);
+        }
+        final AbstractWidgetConverter widgetConverter = this.watcher.getWidgetConverter();
+        if (widgetConverter == null) {
+            return super.a(mouseX, mouseY, button);
+        }
+        return Laby.labyAPI().minecraft().updateMouse(mouseX, mouseY, mouse -> {
+            final MouseButton mouseButton = DefaultKeyMapper.pressMouse(button);
+            return mouseButton != null && widgetConverter.mouseClicked(widget, mouse, mouseButton);
+        });
+    }
+}

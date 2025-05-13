@@ -1,0 +1,17 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package net.labymod.autogen.core.lss.properties.resetters;
+
+import net.labymod.api.client.gui.screen.widget.widgets.transform.InterpolateWidget;
+import net.labymod.api.client.gui.screen.widget.Widget;
+
+public class InterpolateWidgetLssPropertyResetter extends SimpleWidgetLssPropertyResetter
+{
+    @Override
+    public void reset(final Widget widget) {
+        if (widget instanceof InterpolateWidget) {}
+        super.reset(widget);
+    }
+}

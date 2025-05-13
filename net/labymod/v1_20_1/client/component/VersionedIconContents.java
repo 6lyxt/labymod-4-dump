@@ -1,0 +1,71 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package net.labymod.v1_20_1.client.component;
+
+import java.util.Optional;
+import org.jetbrains.annotations.NotNull;
+import net.labymod.api.client.gui.icon.Icon;
+
+public class VersionedIconContents implements sx
+{
+    private Icon icon;
+    private int width;
+    private int height;
+    private String placeholder;
+    
+    public VersionedIconContents(final Icon icon) {
+        this.icon = icon;
+    }
+    
+    @NotNull
+    public Icon icon() {
+        return this.icon;
+    }
+    
+    public void setIcon(final Icon icon) {
+        this.icon = icon;
+    }
+    
+    public int width() {
+        return this.width;
+    }
+    
+    public void setWidth(final int width) {
+        this.width = width;
+    }
+    
+    public int height() {
+        return this.height;
+    }
+    
+    public void setHeight(final int height) {
+        this.height = height;
+    }
+    
+    @NotNull
+    public String placeholder() {
+        return this.placeholder;
+    }
+    
+    public void setPlaceholder(final String placeholder) {
+        this.placeholder = placeholder;
+    }
+    
+    @NotNull
+    public <T> Optional<T> a(@NotNull final ta.a<T> consumer) {
+        return consumer.accept(this.placeholder);
+    }
+    
+    @NotNull
+    public <T> Optional<T> a(@NotNull final ta.b<T> consumer, @NotNull final ts style) {
+        return consumer.accept(style, this.placeholder);
+    }
+    
+    @NotNull
+    @Override
+    public String toString() {
+        return "icon{icon=" + String.valueOf(this.icon) + ", width=" + this.width + ", height=" + this.height + ", placeholder='" + this.placeholder + "'}";
+    }
+}

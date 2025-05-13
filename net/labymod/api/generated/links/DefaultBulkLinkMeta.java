@@ -1,0 +1,134 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package net.labymod.api.generated.links;
+
+import java.util.List;
+import net.labymod.api.client.gui.screen.widget.overlay.WidgetScreenOverlay;
+import net.labymod.api.client.gui.screen.widget.widgets.popup.AdvancedPopupWidget;
+import net.labymod.api.client.gui.hud.hudwidget.widget.WidgetHudWidget;
+import net.labymod.api.client.gui.screen.activity.activities.OldOverlayWidgetActivity;
+import net.labymod.api.client.gui.screen.activity.types.PreloadedTabbedActivity;
+import net.labymod.api.client.gui.screen.widget.widgets.context.ContextMenuListWidget;
+import net.labymod.api.client.gui.screen.widget.widgets.navigation.TabLayoutWidget;
+import net.labymod.api.client.gui.screen.activity.activities.labymod.child.SettingContentActivity;
+import net.labymod.api.client.gui.screen.activity.activities.ConfirmActivity;
+import net.labymod.api.client.gui.screen.activity.types.chatinput.ChatInputTabSettingActivity;
+import net.labymod.api.client.gui.screen.widget.widgets.MarkdownWidget;
+import net.labymod.api.client.gui.screen.widget.widgets.layout.IconSliderWidget;
+import net.labymod.api.client.gui.screen.activity.activities.WorkInProgressActivity;
+import net.labymod.api.client.gui.screen.widget.widgets.PopupWidget;
+import net.labymod.api.client.gui.screen.widget.widgets.input.dropdown.DropdownWidget;
+import net.labymod.api.client.gui.screen.activity.types.AbstractInteractionOverlayActivity;
+import net.labymod.api.client.gui.screen.activity.types.AbstractWheelInteractionOverlayActivity;
+import net.labymod.api.client.gui.screen.widget.widgets.input.color.ColorPickerWidget;
+import net.labymod.api.client.gui.screen.widget.widgets.input.TagInputWidget;
+import net.labymod.api.client.gui.screen.widget.widgets.input.AdvancedSelectionWidget;
+import net.labymod.api.client.gui.screen.activity.types.TabbedActivity;
+import net.labymod.api.client.gui.screen.activity.activities.SearchActivity;
+import net.labymod.api.client.gui.screen.activity.Activity;
+import net.labymod.api.client.gui.screen.widget.widgets.popup.AdvancedPopupActivity;
+import net.labymod.api.client.gui.lss.meta.LinkMeta;
+import net.labymod.api.client.gui.screen.widget.widgets.activity.multiplayer.ServerInfoWidget;
+import net.labymod.api.client.gui.screen.widget.widgets.activity.multiplayer.LiveServerInfoWidget;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import net.labymod.api.client.gui.lss.meta.BulkLinkMeta;
+
+public final class DefaultBulkLinkMeta implements BulkLinkMeta
+{
+    @Override
+    public Map getLinks() {
+        final Map map = new HashMap();
+        final List links0 = new ArrayList();
+        map.put(LiveServerInfoWidget.class, links0);
+        links0.add(new LinkMeta("lss/activity/multiplayer/server-info.lss", 0, ServerInfoWidget.class));
+        final List links2 = new ArrayList();
+        map.put(AdvancedPopupActivity.class, links2);
+        links2.add(new LinkMeta("lss/style.lss", -10127, Activity.class));
+        final List links3 = new ArrayList();
+        map.put(SearchActivity.class, links3);
+        links3.add(new LinkMeta("lss/style.lss", -10127, Activity.class));
+        links3.add(new LinkMeta("lss/activity/search-activity.lss", 0, SearchActivity.class));
+        final List links4 = new ArrayList();
+        map.put(TabbedActivity.class, links4);
+        links4.add(new LinkMeta("lss/style.lss", -10127, Activity.class));
+        links4.add(new LinkMeta("lss/tabbed.lss", 0, TabbedActivity.class));
+        final List links5 = new ArrayList();
+        map.put(AdvancedSelectionWidget.class, links5);
+        links5.add(new LinkMeta("lss/advanced-selection.lss", 0, AdvancedSelectionWidget.class));
+        final List links6 = new ArrayList();
+        map.put(TagInputWidget.class, links6);
+        links6.add(new LinkMeta("lss/widget/tag-input.lss", -10064, TagInputWidget.class));
+        final List links7 = new ArrayList();
+        map.put(ColorPickerWidget.class, links7);
+        links7.add(new LinkMeta("lss/color-picker.lss", 0, ColorPickerWidget.class));
+        final List links8 = new ArrayList();
+        map.put(AbstractWheelInteractionOverlayActivity.class, links8);
+        links8.add(new LinkMeta("lss/style.lss", -10127, Activity.class));
+        links8.add(new LinkMeta("lss/activity/generic-wheel.lss", 0, AbstractWheelInteractionOverlayActivity.class));
+        final List links9 = new ArrayList();
+        map.put(AbstractInteractionOverlayActivity.class, links9);
+        links9.add(new LinkMeta("lss/style.lss", -10127, Activity.class));
+        final List links10 = new ArrayList();
+        map.put(DropdownWidget.class, links10);
+        links10.add(new LinkMeta("lss/activity/overlay/dropdown/dropdown.lss", 0, DropdownWidget.class));
+        final List links11 = new ArrayList();
+        map.put(PopupWidget.class, links11);
+        links11.add(new LinkMeta("lss/activity/popup.lss", 0, PopupWidget.class));
+        final List links12 = new ArrayList();
+        map.put(WorkInProgressActivity.class, links12);
+        links12.add(new LinkMeta("lss/style.lss", -10127, Activity.class));
+        final List links13 = new ArrayList();
+        map.put(IconSliderWidget.class, links13);
+        links13.add(new LinkMeta("lss/widget/icon-slider.lss", 0, IconSliderWidget.class));
+        final List links14 = new ArrayList();
+        map.put(MarkdownWidget.class, links14);
+        links14.add(new LinkMeta("lss/widget/markdown.lss", 0, MarkdownWidget.class));
+        final List links15 = new ArrayList();
+        map.put(ChatInputTabSettingActivity.class, links15);
+        links15.add(new LinkMeta("lss/style.lss", -10127, Activity.class));
+        links15.add(new LinkMeta("lss/activity/overlay/chat/settings.lss", 0, ChatInputTabSettingActivity.class));
+        final List links16 = new ArrayList();
+        map.put(ServerInfoWidget.class, links16);
+        links16.add(new LinkMeta("lss/activity/multiplayer/server-info.lss", 0, ServerInfoWidget.class));
+        final List links17 = new ArrayList();
+        map.put(ConfirmActivity.class, links17);
+        links17.add(new LinkMeta("lss/style.lss", -10127, Activity.class));
+        links17.add(new LinkMeta("lss/activity/confirm.lss", 0, ConfirmActivity.class));
+        final List links18 = new ArrayList();
+        map.put(SettingContentActivity.class, links18);
+        links18.add(new LinkMeta("lss/style.lss", -10127, Activity.class));
+        links18.add(new LinkMeta("lss/activity/settings.lss", -10064, SettingContentActivity.class));
+        links18.add(new LinkMeta("lss/tabbed.lss", 0, SettingContentActivity.class));
+        final List links19 = new ArrayList();
+        map.put(TabLayoutWidget.class, links19);
+        links19.add(new LinkMeta("lss/tabbed.lss", 0, TabLayoutWidget.class));
+        final List links20 = new ArrayList();
+        map.put(Activity.class, links20);
+        links20.add(new LinkMeta("lss/style.lss", -10127, Activity.class));
+        final List links21 = new ArrayList();
+        map.put(ContextMenuListWidget.class, links21);
+        links21.add(new LinkMeta("lss/activity/overlay/context/context.lss", 0, ContextMenuListWidget.class));
+        final List links22 = new ArrayList();
+        map.put(PreloadedTabbedActivity.class, links22);
+        links22.add(new LinkMeta("lss/style.lss", -10127, Activity.class));
+        links22.add(new LinkMeta("lss/tabbed.lss", 0, PreloadedTabbedActivity.class));
+        final List links23 = new ArrayList();
+        map.put(OldOverlayWidgetActivity.class, links23);
+        links23.add(new LinkMeta("lss/style.lss", -10127, Activity.class));
+        final List links24 = new ArrayList();
+        map.put(WidgetHudWidget.class, links24);
+        links24.add(new LinkMeta("lss/widget-hud-widget.lss", -1, WidgetHudWidget.class));
+        links24.add(new LinkMeta("lss/style.lss", 0, WidgetHudWidget.class));
+        final List links25 = new ArrayList();
+        map.put(AdvancedPopupWidget.class, links25);
+        links25.add(new LinkMeta("lss/activity/popup.lss", -10127, AdvancedPopupWidget.class));
+        final List links26 = new ArrayList();
+        map.put(WidgetScreenOverlay.class, links26);
+        links26.add(new LinkMeta("lss/style.lss", -10127, Activity.class));
+        return map;
+    }
+}

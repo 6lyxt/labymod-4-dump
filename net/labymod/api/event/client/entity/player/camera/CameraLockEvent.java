@@ -1,0 +1,21 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package net.labymod.api.event.client.entity.player.camera;
+
+import net.labymod.api.client.entity.player.CameraLockController;
+import net.labymod.api.event.Event;
+
+public class CameraLockEvent implements Event
+{
+    private final CameraLockController.LockType lockType;
+    
+    public CameraLockEvent(final CameraLockController.LockType lockType) {
+        this.lockType = lockType;
+    }
+    
+    public CameraLockController.LockType getLockType() {
+        return this.lockType;
+    }
+}

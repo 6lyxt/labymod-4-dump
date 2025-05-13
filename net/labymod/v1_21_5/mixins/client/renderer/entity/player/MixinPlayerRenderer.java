@@ -1,0 +1,59 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package net.labymod.v1_21_5.mixins.client.renderer.entity.player;
+
+import net.labymod.api.client.gfx.pipeline.blaze3d.buffer.Blaze3DBufferSource;
+import net.labymod.api.client.gfx.GFXBridge;
+import net.labymod.api.client.render.matrix.Stack;
+import net.labymod.api.event.client.render.model.entity.player.PlayerModelRenderHandEvent;
+import net.labymod.api.client.render.model.entity.player.PlayerModel;
+import net.labymod.api.client.entity.player.Player;
+import net.labymod.api.Laby;
+import net.labymod.api.client.options.MainHand;
+import net.labymod.api.client.render.matrix.VanillaStackAccessor;
+import net.labymod.api.event.Phase;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import net.labymod.v1_21_5.client.renderer.entity.layers.VersionedShopItemLayer;
+import net.labymod.v1_21_5.client.render.LivingEntityRendererAccessor;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.Mixin;
+
+@Mixin({ hdc.class })
+public class MixinPlayerRenderer
+{
+    @Inject(method = { "<init>" }, at = { @At("TAIL") })
+    private void labyMod$addNewLayers(final gxv.a context, final boolean slim, final CallbackInfo ci) {
+        final hdc playerRenderer = (hdc)this;
+        ((LivingEntityRendererAccessor)playerRenderer).addCustomLayer(new VersionedShopItemLayer((gzs<hfq, git>)playerRenderer));
+    }
+    
+    @Inject(method = { "renderHand" }, at = { @At("HEAD") })
+    private void labyMod$preHandRender(final fld poseStack, final grn bufferSource, final int packedLightCoords, final alr skinTexture, final gkr modelPart, final boolean secondLayer, final CallbackInfo ci) {
+        final bxe cameraEntity = fqq.Q().ao();
+        if (cameraEntity instanceof final gqj player) {
+            this.labyMod$firePlayerModelRenderEvent(player, poseStack, bufferSource, modelPart, Phase.PRE, packedLightCoords);
+        }
+    }
+    
+    @Inject(method = { "renderHand" }, at = { @At("TAIL") })
+    private void labyMod$postHandRender(final fld poseStack, final grn bufferSource, final int packedLightCoords, final alr skinTexture, final gkr modelPart, final boolean secondLayer, final CallbackInfo ci) {
+        final bxe cameraEntity = fqq.Q().ao();
+        if (cameraEntity instanceof final gqj player) {
+            this.labyMod$firePlayerModelRenderEvent(player, poseStack, bufferSource, modelPart, Phase.POST, packedLightCoords);
+        }
+    }
+    
+    private void labyMod$firePlayerModelRenderEvent(final gqj clientPlayer, final fld poseStack, final grn bufferSource, final gkr modelPart, final Phase phase, final int packedLight) {
+        final Stack stack = ((VanillaStackAccessor)poseStack).stack(bufferSource);
+        final git playerModel = (git)((hdc)this).c();
+        final MainHand hand = playerModel.s.equals(modelPart) ? MainHand.LEFT : MainHand.RIGHT;
+        final GFXBridge gfx = Laby.gfx();
+        final Blaze3DBufferSource blaze3DBufferSource = gfx.blaze3DBufferSource();
+        blaze3DBufferSource.setTemporaryBuffer(bufferSource);
+        Laby.fireEvent(new PlayerModelRenderHandEvent((Player)clientPlayer, (PlayerModel)playerModel, stack, phase, hand, packedLight));
+        blaze3DBufferSource.resetTemporaryBuffer();
+    }
+}

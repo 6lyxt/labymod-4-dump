@@ -1,0 +1,28 @@
+// 
+// Decompiled by Procyon v0.6.0
+// 
+
+package net.labymod.v1_20_5.mixins.client.renderer;
+
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.jetbrains.annotations.Nullable;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Mixin;
+
+@Mixin({ gdi.class })
+public abstract class MixinGameRendererPreloadUIShaders
+{
+    @Shadow
+    @Nullable
+    private static ged W;
+    
+    @Shadow
+    protected abstract ged a(final aus p0, final String p1, final fae p2);
+    
+    @Inject(method = { "preloadUiShader" }, at = { @At("TAIL") })
+    private void labyMod$preloadUiShader(final aus provider, final CallbackInfo ci) {
+        MixinGameRendererPreloadUIShaders.W = this.a(provider, "position_color_tex_lightmap", ezx.t);
+    }
+}
